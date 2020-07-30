@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './question.module.scss'
 import bird from '../../assets/images/bird.jpg'
+import Audioplayer from '../Audioplayer/Audioplayer'
 
 const Question = () => {
     return (
@@ -14,7 +15,7 @@ const Question = () => {
             </div>
 
             <div className={s.audioplayer}>
-                player
+                <Audioplayer audioId='audio' />
             </div>
         </div>
     )

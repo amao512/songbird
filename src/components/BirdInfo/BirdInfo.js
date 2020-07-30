@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import s from './info.module.scss'
 import bird from '../../assets/images/bird.jpg'
+import Audioplayer from '../Audioplayer/Audioplayer'
 
 const BirdInfo = () => {
     const [answer, setAnswer] = useState(false)
@@ -20,7 +21,7 @@ const BirdInfo = () => {
                         </div>
 
                         <div className={s.audioplayer}>
-                            player
+                            <Audioplayer />
                         </div>
                     </div>
 
