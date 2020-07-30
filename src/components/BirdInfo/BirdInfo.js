@@ -10,19 +10,19 @@ const BirdInfo = () => {
         <div className={s.birdInfo}>
             { answer ? (
                 <div className={s.bird}>
-                    <div className={s.image}>
-                        <img src={bird} alt='' />
-                    </div>
-
                     <div className={s.info}>
+                        <div className={s.image}>
+                            <img src={bird} alt='' />
+                        </div>
+
                         <div className={s.birdName}>
                             <h1>Ласточка</h1>
                             <p className={s.englishName}>Delichon urbicum</p>
                         </div>
+                    </div>
 
-                        <div className={s.audioplayer}>
-                            <Audioplayer />
-                        </div>
+                    <div className={s.audioplayer}>
+                        <Audioplayer />
                     </div>
 
                     <div className={s.desc}>

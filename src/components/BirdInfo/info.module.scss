@@ -6,18 +6,18 @@
     height: 100%;
 
     .bird {
-        display: grid;
-        grid-template-columns: 200px 1fr;
-        grid-gap: 15px;
-
-        .image {
-            img {
-                border-radius: 6px;
-            }
-        }
-
         .info {
             padding: 5px 10px;
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            grid-gap: 15px;
+
+            .image {
+                img {
+                    border-radius: 6px;
+                    width: 120px;
+                }
+            }
 
             .birdName {
                 h1 {
@@ -32,9 +32,19 @@
                 }
             }
 
-            .audioplayer {
-                padding: 10px 0;
+            @media screen and (max-width: 420px){
+                grid-template-columns: 1fr;
+
+                .image {
+                    img {
+                        width: 180px;
+                    }
+                }
             }
+        }
+
+        .audioplayer {
+            padding: 10px 0;
         }
 
         .desc {

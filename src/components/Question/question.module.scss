@@ -33,6 +33,21 @@
 @media screen and (max-width: 720px){
     .question {
         grid-column: 1;
+        grid-template-columns: 200px 1fr;
+
+        .birdImage {
+            img {
+                border-radius: 6px;
+                width: 180px;
+            }
+        }
+
+        .birdName {
+            padding: 5px;
+        }
+        .audioplayer {
+            padding: 5px;
+        }
     }
 }
 
@@ -45,6 +60,13 @@
         .birdName,
         .audioplayer {
             padding: 5px 10px;
+        }
+
+        .birdImage {
+            img {
+                border-radius: 6px;
+                width: 220px;
+            }
         }
     }
 }
