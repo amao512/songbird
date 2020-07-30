@@ -12,10 +12,11 @@ const Audio = () => {
             onPlay={e => console.log("onPlay")}
             autoPlay={false}
             customProgressBarSection={[
-                RHAP_UI.MAIN_CONTROLS,
-                RHAP_UI.PROGRESS_BAR,
                 RHAP_UI.CURRENT_TIME,
                 RHAP_UI.CURRENT_LEFT_TIME,
+                RHAP_UI.PROGRESS_BAR,
+                RHAP_UI.MAIN_CONTROLS,
+                RHAP_UI.VOLUME_CONTROLS,
             ]}
             customControlsSection={[]}
             customAdditionalControls={[]}
