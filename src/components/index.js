@@ -1,0 +1,5 @@
+export { default as Header } from './Header/Header'
+export { default as Question } from './Question/Question'
+export { default as AnswerOptions } from './AnswerOptions/AnswerOptions'
+export { default as BirdInfo } from './BirdInfo/BirdInfo'
+export { default as Button } from './Button/Button'
