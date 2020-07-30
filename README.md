@@ -1,52 +1,49 @@
 1. Task:
-   https://github.com/rolling-scopes-school/tasks/blob/master/tasks/rslang/english-for-kids.md
+   https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird.md
 2. App screenshot:
-   https://i.imgur.com/9N60IHl.png
+   https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird/screenshot_birds-quiz.png
 3. Deploy:  
    https://rolling-scopes-school.github.io/hallovarvara-RS2020Q1/english-for-kids/dist/
-4. Done 19.04.20 (deadline 19.04.20)
-5. Score: 200 / 200
-- [x] UI, markup, design of main page (+10) and category page (+10)
-    - [x] both mobile and desktop versions have all described elements
-    - [x] fulfilled all task requirements to app design
-- [x] UI, markup, design of menu (+10)
-    - [x] both mobile and desktop versions have all described elements
-    - [x] fulfilled all task requirements to app design
-    - [x] menu links work
-    - [x] current page link differ from others
-    - [x] all pages have sliding menu
-    - [x] menu closes with smooth animation by clicking on crest or any other app element including menu link
-- [x] Training mode (+20)
-    - [x] english words sound while clicking on card
-    - [x] all cards has button for flipping. there's word translation at the back side. card flip back after mouse cursor goes out from card area.
-- [x] Code quality (+30)
-    - [x] code dublicating minimized (+10)
-    - [x] modular JS (+10)
-    - [x] webpack, eslint, eslint-config-airbnb-base, babel connected and are used (+10)
-- [x] Game mode (+80):
-    - [x] click on mode switcher Train/Play turns on game mode. Here're no flipping button and text on card. Card image takes up all card area (if it's ok with app design). „Start game” button appears. (+10)
-    - [x] clicking on „Start game” button activate english word pronouncing. Word should be one of presented on page and it should be chosen randomly. For each page and every new game words should generating randomly from scratch (+10)
-    - [x] a click on „Start game” button change text on it with „Repeat” icon and view of button. Clicking on „Repeat” button repeats current word pronouncing (+10)
-    - [x] if user've clicked on wrong card, „error” sound sounds (+10)
-    - [x] if user've clicked on correct card, „correct” sound sounds and new random english word from this page is pronouncing. One word can't participate twice in one game. (+10)
-    - [x] card with guessed word become inactive and changes view. Clicking on inactive card doesn't call sound effects and doesn't affect on game score. (+10)
-    - [x] when game's started, every click on active card is right or wrong answer. They're shown up like stars or other symbols of different colors on rating panel. Rating panel shows up in game mode. If rating panel fulls of stars, first stars hide, new continues to show. (+10)
-    - [x] when all words've guessed: (+10)
-        - if all of them are rightly guessed, „success” sound sounds, cards hide, happy smile shows (or another appropriate image),
-        - else „failure” sound sounds, cards hide, sad smile shows (or another appropriate image) and mistakes quantity,
-        - app automatically redirects to main page with categories' list.
-- [x] Statistics page (+40):
-    - [x] here're all categories, all words of each category, every word's translation. Page must be shown correctly minimum on 320 px. (+10)
-    - [x] close to each word are shown and saved in statistics after page reload: (+10)
-        - number of clicks on it's card in training mode,
-        - times word was guessed,
-        - number of mistaken word in game mode,
-        - mistakes density of word.
-    - [x] feature to sort data. Strings sort alphabetically, number by number. Sort can be ascending and descending and must cover all data. (+10)
-    - [x] here're buttons „Repeat difficult words” и „Reset”: (+10)
-        - „Reset” resets statistics,
-        - „Repeat difficult words” open category-like page with words with the highest mistakes density. There can be 0–8 words according in how many words user guessed wrong in game mode. After clicking on „Reset” button, on „Repeat difficult words” page should be no words.
-- [x] Penalties (0):
-    - [x] In app less than 8 categories and less than 8 words in each category (-10)
-    - [x] Errors while app's working. (-10 for each, but no more than the total number of points for requirement implementation)
-    - [x] Not comply with the requirements for Pull Request, repository, commits names (-10) scores by mentor
+4. Done 16.08.20 (deadline 16.08.20)
+5. Score: 240 / 240
+- [x] Вёрстка, дизайн, UI: (+30)
+    - [x] минимальная ширина страницы, при которой приложение отображается корректно – 320 рх
+    - [x] внешний вид приложения полностью повторяет демо или является его улучшенной версией
+- [x] Аудиоплеер: (+30)
+    - [x] стандартный: (+10)
+    - [x] кастомный, такой же, как в демо приложения, может отличаться по цвету: (+10)
+    - [x] у кастомного аудиоплеера есть регулятор громкости звука: (+10)
+          Для кастомизации аудиоплеера можно использовать библиотеки
+- [x] Контент: (+20)
+    - [x] использование заранее подготовленных данных [birds data](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/songbird/birds.js): ( 0 )
+    - [x] создание и использование собственной коллекции данных, либо использование подходящего API: (+20)
+- [x] Header: (+20)
+    - [x] правильное отображение текущего счета игры: (+10)
+    - [x] индикация текущего вопроса: (+10)
+- [x] Блок с вопросом: (+20)
+    - [x] подстановка дефолтного изображения и замена названия птицы на символы (***), пока игрок не выберет правильный ответ: (+10)
+    - [x] при выборе правильного ответа появляется изображение и название птицы: (+10)
+- [x] Блок с вариантами ответов (названия птиц): (+30)
+    - [x] цветовая индикация правильного/неправильного ответа в виде индикаторов разного цвета рядом с названием птицы: (+20)
+    - [x] при клике по названию птицы в блоке с описанием птицы отображается информацию о ней: (+10)
+          Если правильный ответ уже дан, возможность просматривать описания птиц при клике по названию остаётся, цвет индикаторов при этом не изменяется.
+- [x] Блок с описанием птицы: (+30)
+    - [x] пока игрок не кликнул по названию птицы из списка, в блоке выводится короткий текст с предложением послушать плеер и выбрать название   птицы, чей голос прозвучал: (+10)
+    - [x] при клике по названию птицы из списка, в блоке с описанием птицы появляется актуальная информация о ней: (+20)
+          Информация о птице включает:
+            - [x] изображение
+            - [x] название (на русском и на латыни)
+            - [x] аудиоплеер с записью голоса
+            - [x] дополнительное описание птицы.
+- [x] Кнопка перехода к следующему вопросу: (+30)
+    - [x] пока не выбран правильный ответ, кнопка не активна, нет возможности перейти к следующему заданию. Активное и неактивное состояние      кнопки визуально отличаются, например, активная кнопка имеет зеленый, не активная - серый цвет: (+10)
+    - [x] после правильного ответа на последний вопрос, клик по кнопке скрывает блок с вопросом, блок с вариантами ответов и блок с описанием   птицы. Появляется сообщение с поздравлением об окончании игры: (+20)
+    Сообщение содержит количество набранных баллов из максимально возможных и кнопку с предложение сыграть ещё раз.
+- [x] Extra scope: (+30)
+    - [x] звуковая индикация правильного/неправильного ответа: (+20)
+        - [x] при выборе правильного или неправильного ответа издаются разные звуковые сигналы
+        - [x] при выборе неправильного ответа проигрывание аудиоплеера не должно останавливаться
+        - [x] при выборе правильно ответа проигрывание аудиоплеера должно остановиться
+    - [x] Поздравление с абсолютной победой, если набрано максимально возможное количество баллов: (+10)
+          Здесь можно проявить свою фантазию. Это может быть все, что угодно. Например: картинка, анимация, видео, ссылка на что-то интересное, сертификат знатока птичьих голосов, слоган "теперь ты знаешь кто чирикнул" и т.д
+          Для удобства проверки правильные ответы выведите в консоль.
