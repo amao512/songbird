@@ -1,15 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './answer.module.scss'
 
-const AnswerOptions = () => {
+const AnswerOptions = ({ birds, randomAnswer, onAnswer }) => {
+    const [answer, setAnswer] = useState(false)
+
     return (
         <ul className={s.answerOptions}>
-            <li className={s.rightAnswer}>answer</li>
-            <li>answer</li>
-            <li>answer</li>
-            <li>answer</li>
-            <li>answer</li>
-            <li>answer</li>
+            {birds.map(bird => {
+                    return <li key={bird.id} onClick={() => onAnswer(bird)}>{bird.name}</li>
+            })}
         </ul>
     )
 }

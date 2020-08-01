@@ -1,8 +1,8 @@
 import React from 'react'
-import Questions from '../QuestionsList/QuestionsList'
+import QuestionsList from '../QuestionsList/QuestionsList'
 import s from './header.module.scss'
 
-const Header = () => {
+const Header = ({ currentQuestion, score }) => {
     return (
         <header className={s.header}>
             <div className={s.logoScore}>
@@ -11,11 +11,11 @@ const Header = () => {
                 </div>
 
                 <div className={s.score}>
-                    <h3>Score: {0}</h3>
+                    <h3>Score: {score}</h3>
                 </div>
             </div>
 
-            <Questions />
+            <QuestionsList currentQuestion={currentQuestion} />
         </header>
     )
 }

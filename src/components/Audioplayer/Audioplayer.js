@@ -4,11 +4,11 @@ import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/src/styles.scss'
 import 'react-h5-audio-player/lib/styles.css'
 
-const Audio = () => {
+const Audio = ({ audio }) => {
     return (
         <AudioPlayer
             className='player'
-            src="https://www.xeno-canto.org/sounds/uploaded/XIQVMQVUPP/XC518684-Grands%20corbeaux%2009012020%20Suzon.mp3"
+            src={audio}
             onPlay={e => console.log("onPlay")}
             autoPlay={false}
             customProgressBarSection={[

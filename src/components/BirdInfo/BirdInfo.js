@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import s from './info.module.scss'
 import bird from '../../assets/images/bird.jpg'
 import Audioplayer from '../Audioplayer/Audioplayer'
 
-const BirdInfo = () => {
+const BirdInfo = ({ bird, rightAnswer }) => {
     const [answer, setAnswer] = useState(false)
+
+    useEffect(() => {
+        setAnswer(rightAnswer)
+    }, [rightAnswer])
 
     return (
         <div className={s.birdInfo}>
@@ -12,21 +16,21 @@ const BirdInfo = () => {
                 <div className={s.bird}>
                     <div className={s.info}>
                         <div className={s.image}>
-                            <img src={bird} alt='' />
+                            <img src={bird.image} alt='' />
                         </div>
 
                         <div className={s.birdName}>
-                            <h1>Ласточка</h1>
-                            <p className={s.englishName}>Delichon urbicum</p>
+                            <h1>{bird.name}</h1>
+                            <p className={s.englishName}>{bird.species}</p>
                         </div>
                     </div>
 
                     <div className={s.audioplayer}>
-                        <Audioplayer />
+                        <Audioplayer audio={bird.audio} />
                     </div>
 
                     <div className={s.desc}>
-                        <p>Для ласточек характерно негромкое щебетание. Песни ласточек не смолкают на протяжении всего лета. Исследователи различают у птиц до 6 щебечущих звуков: «вит», «ви-вит», «чивит», «чиривит» и т.п. Ласточки любят петь дуэтом.</p>
+                        <p>{bird.description}</p>
                     </div>
                 </div>
             ) : (

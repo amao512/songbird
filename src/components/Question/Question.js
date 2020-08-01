@@ -1,21 +1,21 @@
 import React from 'react'
 import s from './question.module.scss'
-import bird from '../../assets/images/bird.jpg'
+import birdImg from '../../assets/images/bird.jpg'
 import Audioplayer from '../Audioplayer/Audioplayer'
 
-const Question = () => {
+const Question = ({ bird, rightAnswer }) => {
     return (
         <div className={s.question}>
             <div className={s.birdImage}>
-                <img src={bird} alt='' />
+                <img src={rightAnswer ? bird.image : birdImg} alt='' />
             </div>
 
             <div className={s.birdName}>
-                <h1>******</h1>
+                <h1>{rightAnswer ? bird.name : '******'}</h1>
             </div>
 
             <div className={s.audioplayer}>
-                <Audioplayer audioId='audio' />
+                <Audioplayer audio={bird.audio} />
             </div>
         </div>
     )

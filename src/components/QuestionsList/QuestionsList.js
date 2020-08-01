@@ -1,15 +1,23 @@
 import React from 'react'
 import s from './questions.module.scss'
 
-const Questions = () => {
+const Questions = ({ currentQuestion }) => {
+    const questions = [
+        {index: 0, title: 'Разминка'},
+        {index: 1, title: 'Воробьиные'},
+        {index: 2, title: 'Лесные птицы'},
+        {index: 3, title: 'Певчие птицы'},
+        {index: 4, title: 'Хищные птицы'},
+        {index: 5, title: 'Морские птицы'},
+    ]
+
     return (
         <div className={s.questions}>
-            <li className={s.active}><p>Разминка</p></li>
-            <li><p>Воробьиные</p></li>
-            <li><p>Лесные птицы</p></li>
-            <li><p>Певчие птицы</p></li>
-            <li><p>Хищные птицы</p></li>
-            <li><p>Морские птицы</p></li>
+            { questions.map(question => (
+                <li key={question.index} className={question.index === currentQuestion ? s.active : ''}>
+                    <p>{question.title}</p>
+                </li>
+            )) }
         </div>
     )
 }
