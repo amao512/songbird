@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import s from './answer.module.scss'
 
-const AnswerOptions = ({ birds, randomAnswer, onAnswer }) => {
-    const [answer, setAnswer] = useState(false)
-
+const AnswerOptions = ({ birds, onAnswer }) => {
     return (
         <ul className={s.answerOptions}>
             {birds.map(bird => {

@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import s from './info.module.scss'
-import bird from '../../assets/images/bird.jpg'
 import Audioplayer from '../Audioplayer/Audioplayer'
 
-const BirdInfo = ({ bird, rightAnswer }) => {
-    const [answer, setAnswer] = useState(false)
-
-    useEffect(() => {
-        setAnswer(rightAnswer)
-    }, [rightAnswer])
-
+const BirdInfo = ({ bird, isAnswer }) => {
     return (
         <div className={s.birdInfo}>
-            { answer ? (
+            { isAnswer ? (
                 <div className={s.bird}>
                     <div className={s.info}>
                         <div className={s.image}>

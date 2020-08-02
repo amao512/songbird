@@ -1,31 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import { Header, Question, AnswerOptions, BirdInfo, Button } from './components'
-import birdsData from './data'
 import EndGame from './components/EndGame/EndGame'
+import { connect } from 'react-redux'
+import { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion, setCurrentIndex } from './redux/actions/questionsAction'
 
-const App = () => {
-  const [index, setIndex] = useState(0)
-  const [birds, setBirds] = useState(birdsData[index])
-  const [randomAnswer, setRandomAnswer] = useState(0)
-  const [rightAnswer, setRightAnswer] = useState(false)
+const App = props => {
+  const { 
+    birdsQuestions, getBirdsQuestions, setRandomQuestion, 
+    randomQuestion, currentIndex, isAnswer, setCurrentIndex,
+    randomQuestionIndex, setIsAnswer,getNextQuestion,
+  } = props
+  
   const [allScore, setAllScore] = useState(0)
   const [score, setScore] = useState(5)
   const [end, setEnd] = useState(false)
-  const [questions, setQuestions] = useState(0)
 
-  const nextQuestion = () => {
-    setRightAnswer(false)
-    setIndex(prev => prev + 1)
-    setQuestions(prev => prev + 1)
-    setEnd(questions >= 5)
-    setRandomAnswer(Math.floor(Math.random() * Math.floor(5)))
+  const nextQuestion = () => {    
+    setEnd(currentIndex >= 5)
+    setIsAnswer()
+
+    if(currentIndex >= 5){
+      setCurrentIndex()
+    } else {
+      getNextQuestion()
+      setRandomQuestion()
+    }
   }
 
   const onHandleReply = answer => {
-    if(birds[randomAnswer].id === answer.id){
-      setRightAnswer(true)
+    if(randomQuestion.id === answer.id){
       setAllScore(prev => prev + score)
       setScore(5)
+      setIsAnswer()
     } else {
       setScore(prev => prev - 1)
       console.log(score)
@@ -33,29 +39,22 @@ const App = () => {
   }
 
   useEffect(() => {
-    if(index >= birdsData.length){
-      return setBirds(birdsData[0])
-    }
-
-    setBirds(birdsData[index])
-  }, [index])
-
-  useEffect(() => {
-    setRandomAnswer(Math.floor(Math.random() * Math.floor(5)))
-  }, [])
+    getBirdsQuestions()
+    setRandomQuestion()
+  }, [getBirdsQuestions, setRandomQuestion, currentIndex])
 
   return (
     <div className='App'>
       <div className='container'>
-        <Header currentQuestion={index} score={allScore} />
+        <Header currentQuestion={currentIndex} score={allScore} />
 
         <section className='content'>
           {!end ? (
             <>
-              <Question bird={birds[randomAnswer]} rightAnswer={rightAnswer} />
-              <AnswerOptions birds={birds} randomAnswer={randomAnswer} onAnswer={onHandleReply} />
-              <BirdInfo bird={birds[randomAnswer]} rightAnswer={rightAnswer} />
-              <Button nextQuestion={nextQuestion} rightAnswer={rightAnswer} />
+              <Question bird={randomQuestion} isAnswer={isAnswer} />
+              <AnswerOptions birds={birdsQuestions} randomAnswer={randomQuestionIndex} onAnswer={onHandleReply} />
+              <BirdInfo bird={randomQuestion} isAnswer={isAnswer} />
+              <Button nextQuestion={nextQuestion} isAnswer={isAnswer} />
             </>
           ) : (
             <EndGame score={allScore} />
@@ -66,4 +65,12 @@ const App = () => {
   )
 }
 
-export default App
+const mstp = state => ({
+  birdsQuestions: state.questions.birdsQuestions,
+  randomQuestion: state.questions.randomQuestion,
+  randomQuestionIndex: state.questions.randomQuestionIndex,
+  currentIndex: state.questions.currentIndex,
+  isAnswer: state.questions.isAnswer
+})
+
+export default connect(mstp, { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion,setCurrentIndex })(App)
