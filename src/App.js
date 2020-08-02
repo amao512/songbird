@@ -40,6 +40,12 @@ const App = props => {
     setRandomQuestion()
   }, [getBirdsQuestions, setRandomQuestion, currentIndex])
 
+  useEffect(() => {
+    if(score < 0){
+      setScore(0)
+    }
+  }, [score])
+
   return (
     <div className='App'>
       <div className='container'>
