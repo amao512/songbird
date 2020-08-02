@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import s from './answer.module.scss'
+import { connect } from 'react-redux'
 
-const AnswerOptions = ({ birds, onAnswer, randomAnswer }) => {
+const AnswerOptions = ({ birds, onReply, randomQuestion }) => {
     const [wrong, setWrong] = useState({})
     const [right, setRight] = useState(null)
 
     const onHandleClick = (answer, i) => {
-        if(answer.id !== randomAnswer.id){
+        if(answer.id !== randomQuestion.id){
             if(right === null){
                 setWrong({...wrong, [i]: answer.id})
             }
         } else {
-            setRight(randomAnswer.id)
+            setRight(randomQuestion.id)
         }
-        onAnswer(answer)
+        onReply(answer)
     }
 
     useEffect(() => {
         setWrong({})
         setRight(null)
-    }, [randomAnswer])
+    }, [randomQuestion])
 
     return (
         <ul className={s.answerOptions}>
@@ -34,4 +35,9 @@ const AnswerOptions = ({ birds, onAnswer, randomAnswer }) => {
     )
 }
 
-export default AnswerOptions
+const mstp = state => ({
+    birds: state.questions.birdsQuestions,
+    randomQuestion: state.questions.randomQuestion,
+})
+
+export default connect(mstp)(AnswerOptions)

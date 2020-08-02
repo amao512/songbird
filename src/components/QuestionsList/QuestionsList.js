@@ -1,7 +1,8 @@
 import React from 'react'
 import s from './questions.module.scss'
+import { connect } from 'react-redux'
 
-const Questions = ({ currentQuestion }) => {
+const Questions = ({ currentIndex }) => {
     const questions = [
         {index: 0, title: 'Разминка'},
         {index: 1, title: 'Воробьиные'},
@@ -14,7 +15,7 @@ const Questions = ({ currentQuestion }) => {
     return (
         <div className={s.questions}>
             { questions.map(question => (
-                <li key={question.index} className={question.index === currentQuestion ? s.active : ''}>
+                <li key={question.index} className={question.index === currentIndex ? s.active : ''}>
                     <p>{question.title}</p>
                 </li>
             )) }
@@ -22,4 +23,8 @@ const Questions = ({ currentQuestion }) => {
     )
 }
 
-export default Questions
+const mstp = state => ({
+    currentIndex: state.questions.currentIndex
+})
+
+export default connect(mstp)(Questions)

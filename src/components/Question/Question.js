@@ -2,6 +2,7 @@ import React from 'react'
 import s from './question.module.scss'
 import birdImg from '../../assets/images/bird.jpg'
 import Audioplayer from '../Audioplayer/Audioplayer'
+import { connect } from 'react-redux'
 
 const Question = ({ bird, isAnswer }) => {
     return (
@@ -21,4 +22,9 @@ const Question = ({ bird, isAnswer }) => {
     )
 }
 
-export default Question
+const mstp = state => ({
+    bird: state.questions.randomQuestion,
+    isAnswer: state.questions.isAnswer
+})
+
+export default connect(mstp)(Question)

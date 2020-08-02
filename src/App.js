@@ -6,9 +6,8 @@ import { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion, set
 
 const App = props => {
   const { 
-    birdsQuestions, getBirdsQuestions, setRandomQuestion, 
-    randomQuestion, currentIndex, isAnswer, setCurrentIndex,
-    randomQuestionIndex, setIsAnswer, getNextQuestion,
+    getBirdsQuestions, setRandomQuestion, randomQuestion, 
+    currentIndex, setCurrentIndex, setIsAnswer, getNextQuestion,
   } = props
   
   const [allScore, setAllScore] = useState(0)
@@ -22,7 +21,6 @@ const App = props => {
       setIsAnswer()
     } else {
       setScore(prev => prev - 1)
-      // console.log(score)
     }
   }
 
@@ -46,15 +44,15 @@ const App = props => {
   return (
     <div className='App'>
       <div className='container'>
-        <Header currentQuestion={currentIndex} score={allScore} />
+        <Header score={allScore} />
 
         <section className='content'>
           {!end ? (
             <>
-              <Question bird={randomQuestion} isAnswer={isAnswer} />
-              <AnswerOptions birds={birdsQuestions} randomAnswer={randomQuestion} onAnswer={onHandleReply} />
-              <BirdInfo bird={randomQuestion} isAnswer={isAnswer} />
-              <Button nextQuestion={nextQuestion} isAnswer={isAnswer} />
+              <Question />
+              <AnswerOptions onReply={onHandleReply} />
+              <BirdInfo />
+              <Button nextQuestion={nextQuestion} />
             </>
           ) : (
             <EndGame score={allScore} />
@@ -66,11 +64,9 @@ const App = props => {
 }
 
 const mstp = state => ({
-  birdsQuestions: state.questions.birdsQuestions,
   randomQuestion: state.questions.randomQuestion,
   randomQuestionIndex: state.questions.randomQuestionIndex,
   currentIndex: state.questions.currentIndex,
-  isAnswer: state.questions.isAnswer
 })
 
 export default connect(mstp, { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion,setCurrentIndex })(App)

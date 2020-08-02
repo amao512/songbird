@@ -1,6 +1,7 @@
 import React from 'react'
 import s from './info.module.scss'
 import Audioplayer from '../Audioplayer/Audioplayer'
+import { connect } from 'react-redux'
 
 const BirdInfo = ({ bird, isAnswer }) => {
     return (
@@ -33,4 +34,9 @@ const BirdInfo = ({ bird, isAnswer }) => {
     )
 }
 
-export default BirdInfo
+const mstp = state => ({
+    bird: state.questions.randomQuestion,
+    isAnswer: state.questions.isAnswer
+})
+
+export default connect(mstp)(BirdInfo)
