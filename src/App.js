@@ -8,12 +8,23 @@ const App = props => {
   const { 
     birdsQuestions, getBirdsQuestions, setRandomQuestion, 
     randomQuestion, currentIndex, isAnswer, setCurrentIndex,
-    randomQuestionIndex, setIsAnswer,getNextQuestion,
+    randomQuestionIndex, setIsAnswer, getNextQuestion,
   } = props
   
   const [allScore, setAllScore] = useState(0)
   const [score, setScore] = useState(5)
   const [end, setEnd] = useState(false)
+
+  const onHandleReply = answer => {
+    if(randomQuestion.id === answer.id){
+      setAllScore(prev => prev + score)
+      setScore(5)
+      setIsAnswer()
+    } else {
+      setScore(prev => prev - 1)
+      // console.log(score)
+    }
+  }
 
   const nextQuestion = () => {    
     setEnd(currentIndex >= 5)
@@ -24,17 +35,6 @@ const App = props => {
     } else {
       getNextQuestion()
       setRandomQuestion()
-    }
-  }
-
-  const onHandleReply = answer => {
-    if(randomQuestion.id === answer.id){
-      setAllScore(prev => prev + score)
-      setScore(5)
-      setIsAnswer()
-    } else {
-      setScore(prev => prev - 1)
-      console.log(score)
     }
   }
 
@@ -52,7 +52,7 @@ const App = props => {
           {!end ? (
             <>
               <Question bird={randomQuestion} isAnswer={isAnswer} />
-              <AnswerOptions birds={birdsQuestions} randomAnswer={randomQuestionIndex} onAnswer={onHandleReply} />
+              <AnswerOptions birds={birdsQuestions} randomAnswer={randomQuestion} onAnswer={onHandleReply} />
               <BirdInfo bird={randomQuestion} isAnswer={isAnswer} />
               <Button nextQuestion={nextQuestion} isAnswer={isAnswer} />
             </>
