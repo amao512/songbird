@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Header, Question, AnswerOptions, BirdInfo, Button } from './components'
-import EndGame from './components/EndGame/EndGame'
+import { Header, Question, AnswerOptions, BirdInfo, Button, EndGame } from './components'
 import { connect } from 'react-redux'
 import { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion, setCurrentIndex } from './redux/actions/questionsAction'
 
