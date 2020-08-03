@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react'
 import s from './answer.module.scss'
 import { connect } from 'react-redux'
+import SoundIndication from '../SoundIndication/SoundIndication'
+import win from '../../assets/music/win.mp3'
+import lose from '../../assets/music/lost.mp3'
 
 const AnswerOptions = ({ birds, onReply, randomQuestion }) => {
     const [wrong, setWrong] = useState({})
     const [right, setRight] = useState(null)
+    const [indication, setIndication] = useState(null)
 
     const onHandleClick = (answer, i) => {
         if(answer.id !== randomQuestion.id){
             if(right === null){
                 setWrong({...wrong, [i]: answer.id})
+                setIndication(lose)
+                setTimeout(() => setIndication(null), 500)
             }
         } else {
             setRight(randomQuestion.id)
+            setIndication(win)
         }
         onReply(answer)
     }
@@ -20,6 +27,7 @@ const AnswerOptions = ({ birds, onReply, randomQuestion }) => {
     useEffect(() => {
         setWrong({})
         setRight(null)
+        setIndication(null)
     }, [randomQuestion])
 
     return (
@@ -28,9 +36,11 @@ const AnswerOptions = ({ birds, onReply, randomQuestion }) => {
                 return <li 
                             key={bird.id} 
                             className={wrong[index] === bird.id ? s.wrongAnswer : right === bird.id ? s.rightAnswer : '' } 
-                            onClick={() => !right && onHandleClick(bird, index)}
+                            onClick={() => (!right && (wrong[index] !== bird.id)) && onHandleClick(bird, index)}
                         >{bird.name}</li>
             })}
+
+            <SoundIndication sound={indication} />
         </ul>
     )
 }
