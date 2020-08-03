@@ -35,6 +35,12 @@ const App = props => {
     }
   }
 
+  const toggleModal = () => {
+    setEnd(false)
+    setAllScore(0)
+    setScore(5)
+  }
+
   useEffect(() => {
     getBirdsQuestions()
     setRandomQuestion()
@@ -52,16 +58,12 @@ const App = props => {
         <Header score={allScore} />
 
         <section className='content'>
-          {!end ? (
-            <>
-              <Question />
-              <AnswerOptions onReply={onHandleReply} />
-              <BirdInfo />
-              <Button nextQuestion={nextQuestion} />
-            </>
-          ) : (
-            <EndGame score={allScore} />
-          )}
+          <Question />
+          <AnswerOptions onReply={onHandleReply} />
+          <BirdInfo />
+          <Button nextQuestion={nextQuestion} />
+          
+          {end && <EndGame score={allScore} toggle={toggleModal} />}
         </section>
       </div>
     </div>
