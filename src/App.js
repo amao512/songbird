@@ -2,24 +2,23 @@ import React, { useState, useEffect } from 'react'
 import { Header, Question, AnswerOptions, BirdInfo, Button, EndGame } from './components'
 import { connect } from 'react-redux'
 import { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion, setCurrentIndex } from './redux/actions/questionsAction'
+import { setAllScore, subtractScore, nullifyScore, nullifyAllScore } from './redux/actions/scoreAction'
 
 const App = props => {
   const { 
     getBirdsQuestions, setRandomQuestion, randomQuestion, 
     currentIndex, setCurrentIndex, setIsAnswer, getNextQuestion,
+    setAllScore, subtractScore, nullifyScore, nullifyAllScore, score
   } = props
   
-  const [allScore, setAllScore] = useState(0)
-  const [score, setScore] = useState(5)
   const [end, setEnd] = useState(false)
 
   const onHandleReply = answer => {
     if(randomQuestion.id === answer.id){
-      setAllScore(prev => prev + score)
-      setScore(5)
+      setAllScore()
       setIsAnswer()
     } else {
-      setScore(prev => prev - 1)
+      subtractScore()
     }
   }
 
@@ -37,8 +36,7 @@ const App = props => {
 
   const toggleModal = () => {
     setEnd(false)
-    setAllScore(0)
-    setScore(5)
+    nullifyAllScore()
   }
 
   useEffect(() => {
@@ -48,22 +46,25 @@ const App = props => {
 
   useEffect(() => {
     if(score < 0){
-      setScore(0)
+      nullifyScore()
     }
-  }, [score])
+  }, [score, nullifyScore])
 
   return (
     <div className='App'>
       <div className='container'>
-        <Header score={allScore} />
+        <Header />
 
         <section className='content'>
-          <Question />
-          <AnswerOptions onReply={onHandleReply} />
-          <BirdInfo />
-          <Button nextQuestion={nextQuestion} />
+          {!end && <>
+              <Question />
+              <AnswerOptions onReply={onHandleReply} />
+              <BirdInfo />
+              <Button nextQuestion={nextQuestion} />
+            </>
+          }
           
-          {end && <EndGame score={allScore} toggle={toggleModal} />}
+          {end && <EndGame toggle={toggleModal} />}
         </section>
       </div>
     </div>
@@ -74,6 +75,11 @@ const mstp = state => ({
   randomQuestion: state.questions.randomQuestion,
   randomQuestionIndex: state.questions.randomQuestionIndex,
   currentIndex: state.questions.currentIndex,
+  score: state.score.score
 })
 
-export default connect(mstp, { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion,setCurrentIndex })(App)
+export default connect(mstp, { 
+  getBirdsQuestions, setRandomQuestion, 
+  setIsAnswer, getNextQuestion,setCurrentIndex, setAllScore, 
+  subtractScore, nullifyScore, nullifyAllScore 
+})(App)

@@ -3,10 +3,11 @@ import s from './info.module.scss'
 import Audioplayer from '../Audioplayer/Audioplayer'
 import { connect } from 'react-redux'
 
-const BirdInfo = ({ bird, isAnswer }) => {
+const BirdInfo = ({ bird, selectedBird }) => {
+    console.log(selectedBird)
     return (
         <div className={s.birdInfo}>
-            { isAnswer ? (
+            { bird ? (
                 <div className={s.bird}>
                     <div className={s.info}>
                         <div className={s.image}>
@@ -35,8 +36,7 @@ const BirdInfo = ({ bird, isAnswer }) => {
 }
 
 const mstp = state => ({
-    bird: state.questions.randomQuestion,
-    isAnswer: state.questions.isAnswer
+    bird: state.questions.selectedBird
 })
 
 export default connect(mstp)(BirdInfo)

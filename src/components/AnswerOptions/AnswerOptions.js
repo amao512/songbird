@@ -4,8 +4,9 @@ import { connect } from 'react-redux'
 import SoundIndication from '../SoundIndication/SoundIndication'
 import win from '../../assets/music/win.mp3'
 import lose from '../../assets/music/lost.mp3'
+import { selectBird } from '../../redux/actions/questionsAction'
 
-const AnswerOptions = ({ birds, onReply, randomQuestion }) => {
+const AnswerOptions = ({ birds, onReply, randomQuestion, selectBird }) => {
     const [wrong, setWrong] = useState({})
     const [right, setRight] = useState(null)
     const [indication, setIndication] = useState(null)
@@ -22,6 +23,7 @@ const AnswerOptions = ({ birds, onReply, randomQuestion }) => {
             setIndication(win)
         }
         onReply(answer)
+        selectBird(answer)
     }
 
     useEffect(() => {
@@ -50,4 +52,4 @@ const mstp = state => ({
     randomQuestion: state.questions.randomQuestion,
 })
 
-export default connect(mstp)(AnswerOptions)
+export default connect(mstp, { selectBird })(AnswerOptions)

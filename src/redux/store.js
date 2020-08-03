@@ -1,8 +1,10 @@
 import { combineReducers, createStore } from "redux";
-import { questionsAction } from "./reducers/questionsReducer";
+import { questionsReducer } from "./reducers/questionsReducer";
+import { scoreReducer } from "./reducers/scoreReducer";
 
 const reducers = combineReducers({
-    questions: questionsAction
+    questions: questionsReducer,
+    score: scoreReducer
 })
 
 export const store = createStore(reducers)

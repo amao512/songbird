@@ -1,6 +1,7 @@
 import React from 'react'
 import QuestionsList from '../QuestionsList/QuestionsList'
 import s from './header.module.scss'
+import { connect } from 'react-redux'
 
 const Header = ({ score }) => {
     return (
@@ -20,4 +21,8 @@ const Header = ({ score }) => {
     )
 }
 
-export default Header
+const mstp = state => ({
+    score: state.score.allScore
+})
+
+export default connect(mstp)(Header)

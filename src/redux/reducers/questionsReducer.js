@@ -1,5 +1,5 @@
 import birdsData from '../../data'
-import { GET_BIRDS_QUESTIONS, SET_RANDOM_QUESTION, SET_IS_ANSWER, GET_NEXT_QUESTIONS, SET_CURRENT_INDEX } from '../constants'
+import { GET_BIRDS_QUESTIONS, SET_RANDOM_QUESTION, SET_IS_ANSWER, GET_NEXT_QUESTIONS, SET_CURRENT_INDEX, SELECT_BIRD } from '../constants'
 
 const initialState = {
     birdsData: birdsData,
@@ -7,10 +7,11 @@ const initialState = {
     birdsQuestions: [],
     randomQuestionIndex: Math.floor(Math.random() * Math.floor(5)),
     randomQuestion: {},
-    isAnswer: false
+    isAnswer: false,
+    selectedBird: null
 }
 
-export const questionsAction = (state = initialState, action) => {
+export const questionsReducer = (state = initialState, action) => {
     switch(action.type){
         case GET_BIRDS_QUESTIONS:
             return {
@@ -20,7 +21,8 @@ export const questionsAction = (state = initialState, action) => {
         case GET_NEXT_QUESTIONS:
             return {
                 ...state,
-                currentIndex: state.currentIndex + 1
+                currentIndex: state.currentIndex + 1,
+                selectedBird: null
             }
         case SET_RANDOM_QUESTION:
             return {
@@ -36,7 +38,13 @@ export const questionsAction = (state = initialState, action) => {
         case SET_CURRENT_INDEX:
             return {
                 ...state,
-                currentIndex: action.payload
+                currentIndex: action.payload,
+                selectedBird: null
+            }
+        case SELECT_BIRD:
+            return {
+                ...state,
+                selectedBird: action.payload
             }
         default:
             return state
