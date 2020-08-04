@@ -4,26 +4,32 @@ import { connect } from 'react-redux'
 import SoundIndication from '../SoundIndication/SoundIndication'
 import win from '../../assets/music/win.mp3'
 import lose from '../../assets/music/lost.mp3'
-import { selectBird } from '../../redux/actions/questionsAction'
+import { selectBird, setIsAnswer } from '../../redux/actions/questionsAction'
+import { setAllScore, subtractScore } from '../../redux/actions/scoreAction'
 
-const AnswerOptions = ({ birds, onReply, randomQuestion, selectBird }) => {
+const AnswerOptions = ({ birds, randomQuestion, selectBird, setAllScore, setIsAnswer, subtractScore }) => {
     const [wrong, setWrong] = useState({})
     const [right, setRight] = useState(null)
     const [indication, setIndication] = useState(null)
 
     const onHandleClick = (answer, i) => {
+        selectBird(answer)
+        
         if(answer.id !== randomQuestion.id){
-            if(right === null){
+            if(right === null && wrong[i] !== answer.id){
+                subtractScore()
                 setWrong({...wrong, [i]: answer.id})
                 setIndication(lose)
                 setTimeout(() => setIndication(null), 500)
             }
         } else {
-            setRight(randomQuestion.id)
-            setIndication(win)
+            if(!right){
+                setRight(randomQuestion.id)
+                setIndication(win)
+                setAllScore()
+                setIsAnswer()
+            }
         }
-        onReply(answer)
-        selectBird(answer)
     }
 
     useEffect(() => {
@@ -38,7 +44,7 @@ const AnswerOptions = ({ birds, onReply, randomQuestion, selectBird }) => {
                 return <li 
                             key={bird.id} 
                             className={wrong[index] === bird.id ? s.wrongAnswer : right === bird.id ? s.rightAnswer : '' } 
-                            onClick={() => (!right && (wrong[index] !== bird.id)) && onHandleClick(bird, index)}
+                            onClick={() => onHandleClick(bird, index)}
                         >{bird.name}</li>
             })}
 
@@ -52,4 +58,4 @@ const mstp = state => ({
     randomQuestion: state.questions.randomQuestion,
 })
 
-export default connect(mstp, { selectBird })(AnswerOptions)
+export default connect(mstp, { selectBird, setAllScore, setIsAnswer, subtractScore })(AnswerOptions)

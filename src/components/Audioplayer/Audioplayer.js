@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './audio.scss'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/src/styles.scss'
 import 'react-h5-audio-player/lib/styles.css'
 
 const Audio = ({ audio }) => {
+    const [song, setSong] = useState(null)
+
+    useEffect(() => {
+        setSong(audio)
+    }, [audio])
+
     return (
         <AudioPlayer
             className='player'
-            src={audio}
-            onPlay={e => console.log("onPlay")}
+            src={song}
             autoPlay={false}
             customProgressBarSection={[
                 RHAP_UI.CURRENT_TIME,
