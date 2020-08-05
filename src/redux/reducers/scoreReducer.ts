@@ -1,29 +1,31 @@
-import { SUBTRACT_SCORE, SET_ALL_SCORE, NULLIFY_SCORE, NULLIFY_ALL_SCORE } from "../constants"
+import { ScoreActionsType } from './../actions/scoreAction'
 
 const initialState = {
-    allScore: 0,
-    score: 5
+    allScore: 0 as number,
+    score: 5 as number
 }
 
-export const scoreReducer = (state = initialState, action) => {
+type ScoreReducerType = typeof initialState
+
+export const scoreReducer = (state = initialState, action: ScoreActionsType): ScoreReducerType => {
     switch(action.type){
-        case SET_ALL_SCORE:
+        case 'SET_ALL_SCORE':
             return {
                 ...state,
                 allScore: state.allScore + state.score,
                 score: 5
             }
-        case SUBTRACT_SCORE:
+        case 'SUBTRACT_SCORE':
             return {
                 ...state,
                 score: state.score - 1
             }
-        case NULLIFY_SCORE:
+        case 'NULLIFY_SCORE':
             return {
                 ...state,
                 score: 0
             }
-        case NULLIFY_ALL_SCORE:
+        case 'NULLIFY_ALL_SCORE':
             return {
                 ...state,
                 allScore: 0,

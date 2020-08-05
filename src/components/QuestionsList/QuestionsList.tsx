@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { FC } from 'react'
 import s from './questions.module.scss'
 import { connect } from 'react-redux'
+import { RootState } from '../../redux/store'
 
-const Questions = ({ currentIndex }) => {
+type MapStatePropsType = {
+    currentIndex: number
+}
+
+type PropsType = MapStatePropsType
+
+const Questions: FC<PropsType> = ({ currentIndex }) => {
     const questions = [
         {index: 0, title: 'Разминка'},
         {index: 1, title: 'Воробьиные'},
@@ -23,8 +30,8 @@ const Questions = ({ currentIndex }) => {
     )
 }
 
-const mstp = state => ({
+const mstp = (state: RootState): MapStatePropsType => ({
     currentIndex: state.questions.currentIndex
 })
 
-export default connect(mstp)(Questions)
+export default connect<MapStatePropsType, {}, {}, RootState>(mstp)(Questions)

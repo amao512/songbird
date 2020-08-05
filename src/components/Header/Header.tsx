@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
 import QuestionsList from '../QuestionsList/QuestionsList'
 import s from './header.module.scss'
 import { connect } from 'react-redux'
+import { RootState } from '../../redux/store'
 
-const Header = ({ score }) => {
+type MapStatePropsType = {
+    score: number
+}
+
+type PropsType = MapStatePropsType
+
+const Header: FC<PropsType> = ({ score }) => {
     return (
         <header className={s.header}>
             <div className={s.logoScore}>
@@ -21,8 +28,8 @@ const Header = ({ score }) => {
     )
 }
 
-const mstp = state => ({
+const mstp = (state: RootState): MapStatePropsType => ({
     score: state.score.allScore
 })
 
-export default connect(mstp)(Header)
+export default connect<MapStatePropsType, {}, {}, RootState>(mstp)(Header)

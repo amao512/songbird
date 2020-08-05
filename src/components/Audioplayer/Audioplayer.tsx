@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import './audio.scss'
 import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player'
 import 'react-h5-audio-player/src/styles.scss'
 import 'react-h5-audio-player/lib/styles.css'
 
-const Audio = ({ audio }) => {
-    const [song, setSong] = useState(null)
+type PropsType = {
+    audio: string
+}
+
+const Audio: FC<PropsType> = ({ audio }) => {
+    const [song, setSong] = useState<string>('')
 
     useEffect(() => {
         setSong(audio)

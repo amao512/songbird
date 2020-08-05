@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { FC } from 'react'
 import s from './end.module.scss'
 import { connect } from 'react-redux'
+import { BirdDataType } from '../../redux/reducers/questionsReducer'
+import { RootState } from '../../redux/store'
 
-const EndGame = ({ score, birds, toggle }) => {
+type MapStatePropsType = {
+    birds: Array<BirdDataType>
+    score: number
+}
+
+type OwnProps = {
+    toggle: () => void
+}
+
+type PropsType = OwnProps & MapStatePropsType
+
+const EndGame: FC<PropsType> = ({ score, birds, toggle }) => {
     const maxScore = birds.length * 5
 
     return (
@@ -16,9 +29,9 @@ const EndGame = ({ score, birds, toggle }) => {
     )
 }
 
-const mstp = state => ({
+const mstp = (state: RootState): MapStatePropsType => ({
     birds: state.questions.birdsData,
     score: state.score.allScore
 })
 
-export default connect(mstp)(EndGame)
+export default connect<MapStatePropsType, {}, OwnProps, RootState>(mstp)(EndGame)

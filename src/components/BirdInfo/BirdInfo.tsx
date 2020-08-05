@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { FC } from 'react'
 import s from './info.module.scss'
 import Audioplayer from '../Audioplayer/Audioplayer'
 import { connect } from 'react-redux'
+import { BirdDataType } from '../../redux/reducers/questionsReducer'
+import { RootState } from '../../redux/store'
 
-const BirdInfo = ({ bird, selectedBird }) => {
-    console.log(selectedBird)
+type MapStatePropsType = {
+    bird: BirdDataType | null
+}
+
+type PropsType = MapStatePropsType
+
+const BirdInfo: FC<PropsType> = ({ bird }) => {
     return (
         <div className={s.birdInfo}>
             { bird ? (
@@ -35,8 +42,8 @@ const BirdInfo = ({ bird, selectedBird }) => {
     )
 }
 
-const mstp = state => ({
+const mstp = (state: RootState): MapStatePropsType => ({
     bird: state.questions.selectedBird
 })
 
-export default connect(mstp)(BirdInfo)
+export default connect<MapStatePropsType, {}, {}, RootState>(mstp)(BirdInfo)

@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 
-const SoundIndication = ({ sound }) => {
+type OwnProps = {
+    sound: string
+}
+
+type PropsType = OwnProps
+
+const SoundIndication: FC<PropsType> = ({ sound }) => {
     return (
         <audio src={sound} autoPlay>
             <source src={sound} type="audio/mpeg"></source>

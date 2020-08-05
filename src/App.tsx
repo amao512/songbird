@@ -1,10 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { Header, Question, AnswerOptions, BirdInfo, Button, EndGame } from './components'
 import { connect } from 'react-redux'
-import { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion, setCurrentIndex } from './redux/actions/questionsAction'
-import { nullifyScore, nullifyAllScore } from './redux/actions/scoreAction'
+import { questionsActions } from './redux/actions/questionsAction'
+import { scoreActions } from './redux/actions/scoreAction'
+import { RootState } from './redux/store'
 
-const App = props => {
+const { getBirdsQuestions, setRandomQuestion, setIsAnswer, getNextQuestion, setCurrentIndex } = questionsActions
+const { nullifyScore, nullifyAllScore } = scoreActions
+
+type MapStatePropsType = {
+  randomQuestion: any
+  randomQuestionIndex: number
+  currentIndex: number
+  score: number
+}
+
+type MapDispatchPropsType = {
+  getBirdsQuestions: () => void
+  setRandomQuestion: () => void
+  setIsAnswer: () => void
+  getNextQuestion: () => void
+  setCurrentIndex: () => void
+  nullifyScore: () => void
+  nullifyAllScore: () => void
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType
+
+const App: FC<PropsType> = props => {
   const { 
     getBirdsQuestions, setRandomQuestion,
     currentIndex, setCurrentIndex, setIsAnswer, getNextQuestion,
@@ -62,14 +85,14 @@ const App = props => {
   )
 }
 
-const mstp = state => ({
+const mstp = (state: RootState): MapStatePropsType => ({
   randomQuestion: state.questions.randomQuestion,
   randomQuestionIndex: state.questions.randomQuestionIndex,
   currentIndex: state.questions.currentIndex,
   score: state.score.score
 })
 
-export default connect(mstp, { 
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, RootState>(mstp, { 
   getBirdsQuestions, setRandomQuestion, 
   setIsAnswer, getNextQuestion, setCurrentIndex,
   nullifyScore, nullifyAllScore 
