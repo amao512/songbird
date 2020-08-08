@@ -7,8 +7,8 @@ import { scoreActions } from '../../redux/actions/scoreAction'
 import { BirdDataType } from '../../redux/reducers/questionsReducer'
 import { RootState } from '../../redux/store'
 
-const win = require('../../assets/music/win.mp3')
-const lose = require('../../assets/music/lost.mp3')
+const lost = 'https://birds-quiz.netlify.app/static/media/error.165166d5.mp3'
+const win = 'https://birds-quiz.netlify.app/static/media/win.a1e9e8b6.mp3'
 
 const { selectBird, setIsAnswer } = questionsActions
 const { setAllScore, subtractScore } = scoreActions
@@ -38,7 +38,7 @@ const AnswerOptions: FC<PropsType> = ({ birds, randomQuestion, selectBird, setAl
         if(answer.id !== randomQuestion.id){
             if(right === null && wrong[i] !== answer.id){
                 setIndication('')
-                setIndication(lose)
+                setIndication(lost)
                 subtractScore()
                 setWrong({...wrong, [i]: answer.id})
                 setTimeout(() => setIndication(''), 500)
