@@ -40,7 +40,7 @@ const AnswerOptions: FC<PropsType> = ({ birds, randomQuestion, selectBird, setAl
                 subtractScore()
                 setWrong({...wrong, [i]: answer.id})
                 setIndication(lose)
-                setTimeout(() => setIndication(''), 500)
+                setTimeout(() => setIndication(''), 800)
             }
         } else {
             if(!right){
